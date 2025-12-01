@@ -34,7 +34,7 @@ export default {
   <HomeSection class="border-b border-black/30">
     <template #title>Categories</template>
     <template #details>
-      <div class="flex items-center gap-25">
+      <div class="">
         <h3 class="text-3xl font-semibold tracking-[1px]">
           Browse By Category
         </h3>
