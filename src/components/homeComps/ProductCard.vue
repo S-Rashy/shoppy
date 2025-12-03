@@ -21,7 +21,7 @@ export default {
 <template>
   
 
-    <div class="w-full group">
+    <RouterLink :to="{path: '/product', query: { category: product.category, productId: product.id, name: product.title }}" class="w-full group">
       <div
         class="h-[250px] bg-[#F5F5F5] rounded-[4px] pt-4 flex flex-col justify-between bg-contain bg-center bg-no-repeat"
         :style="{ backgroundImage: `url(${product.image})` }"
@@ -57,5 +57,5 @@ export default {
           >
         </p>
       </div>
-    </div>
+    </RouterLink>
 </template>

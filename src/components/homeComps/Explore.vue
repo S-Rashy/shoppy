@@ -1,11 +1,13 @@
 <script>
 import HomeSection from "@/slots/HomeSection.vue";
 import ProductCard from "./ProductCard.vue";
+import MainButton from "@/slots/MainButton.vue";
 
 export default {
   components: {
     HomeSection,
     ProductCard,
+    MainButton
   },
   async created() {
     try {
@@ -50,6 +52,10 @@ export default {
       />
     </section>
   </section>
+
+   <div class="flex my-10 justify-center">
+      <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
+    </div>
 
 
   </HomeSection>
