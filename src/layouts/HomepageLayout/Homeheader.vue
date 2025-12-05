@@ -12,7 +12,7 @@ export default {
     HeartIcon,
     CartIcon,
     UserIcon,
-    TopHeader
+    TopHeader,
   },
   data() {
     return {
@@ -21,7 +21,6 @@ export default {
         { name: "Home", path: "/" },
         { name: "Contact", path: "/contact" },
         { name: "About", path: "/about" },
-        { name: "Sign Up", path: "/auth/signup" },
       ],
     };
   },
@@ -43,13 +42,15 @@ export default {
     isAuthPage() {
       return this.$route.path.startsWith("/auth");
     },
-    
+    isLoggedIn() {
+      return this.$store.getters["userStore/isLoggedIn"];
+    },
   },
 };
 </script>
 
 <template>
-    <TopHeader />
+  <TopHeader />
   <header
     class="w-full flex items-center justify-between py-5 px-20 border-b-black/50 border-b"
   >
@@ -68,6 +69,9 @@ export default {
       >
         {{ route.name }}
       </RouterLink>
+      <RouterLink to="/auth/signup" v-if="!isLoggedIn" class="pb-1 border-b border-transparent"
+        >Sign Up</RouterLink
+      >
     </nav>
 
     <main class="flex gap-8 item">
@@ -123,7 +127,7 @@ export default {
         >
         <div
           @click="logout"
-            class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+          class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
         >
           Logout
         </div>

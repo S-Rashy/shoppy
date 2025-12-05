@@ -61,6 +61,11 @@ export default {
       ],
     };
   },
+  methods: {
+    toggleLike(product) {
+      product.liked = !product.liked;
+    },
+  },
 };
 </script>
 <template>
@@ -124,7 +129,9 @@ export default {
             </div>
             <div class="flex flex-col gap-1 items-center">
               <div
-                class="rounded-[50%] bg-white size-8 text-white flex justify-center items-center cursor-pointer hover:text-red-500 transition-colors duration-200"
+                class="rounded-[50%] bg-white size-8 flex justify-center items-center cursor-pointer hover:text-red-500 transition-colors duration-200"
+                @click="toggleLike(product)"
+                :class="product.liked ? 'text-red-500' : 'text-white'"
               >
                 <HeartIcon />
               </div>
@@ -156,9 +163,7 @@ export default {
     </section>
 
     <div class="flex my-10 justify-center">
-        <MainButton class="w-[234px] h-[56px]">
-          View All Products
-        </MainButton>
+      <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
     </div>
   </HomeSection>
 </template>

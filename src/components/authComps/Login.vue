@@ -7,17 +7,12 @@ export default {
   },
    data() {
     return {
-      email: "",
     };
   },
   methods: {
     handleLogin() {
-      const userData = {
-        isLoggedIn: true,
-        userEmail: this.email,
-      };
+     this.$store.dispatch("userStore/setUser");
 
-      localStorage.setItem("userData", JSON.stringify(userData));
       this.$router.push({ name: "HomePage" });
     },
   },

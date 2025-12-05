@@ -3,7 +3,7 @@ export default {};
 </script>
 
 <template>
-  <main class="w-55">
+  <main class="w-55 pt-5">
     <aside class="space-y-2">
       <h4 class="font-medium my-3">Manage My Account</h4>
       <p class="ml-3 text-[#DB4444]">My Profile</p>

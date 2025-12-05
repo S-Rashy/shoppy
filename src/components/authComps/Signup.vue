@@ -5,6 +5,19 @@ export default {
   components: {
     MainButton,
   },
+  data() {
+    return {
+      firstName: "",
+    };
+  },
+   methods: {
+    handleSignup() {
+      this.$store.dispatch("userStore/setUser", this.firstName);
+
+      this.$router.push({ name: "HomePage" });
+    }
+  }
+
 };
 </script>
 
@@ -16,6 +29,7 @@ export default {
     </div>
     <form class="flex flex-col space-y-4 w-[371px]">
       <input
+        v-model="firstName"
         type="text"
         placeholder="Name"
         class="py-2 border-b border-b-black/40 outline-none"
@@ -32,7 +46,7 @@ export default {
       />
 
       <div class="space-y-4 mx-auto">
-        <MainButton>Create Account</MainButton>
+        <MainButton @click.prevent="handleSignup">Create Account</MainButton>
         <button
           class="w-90 h-14 rounded-[4px] border border-black/40 flex justify-center items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-1 hover:shadow-lg hover:border-2"
         >
