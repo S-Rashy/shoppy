@@ -7,10 +7,10 @@ export const userStore = {
   },
   getters: {
     getFirstName(state) {
-      return state.user.firstName;
+      return state.user?.firstName;
     },
     isLoggedIn(state) {
-      return state.user.isLoggedIn;
+      return state.user?.isLoggedIn;
     },
   },
   mutations: {

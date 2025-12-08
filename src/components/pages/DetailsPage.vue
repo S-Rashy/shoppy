@@ -1,19 +1,26 @@
 <script>
 export default {
   
-  async mounted() {
-    const id = this.$route.query.productId;
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const data = await response.json();
-    this.product = data;
+  // async mounted() {
+  //   const id = this.$route.query.productId;
+  //   const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  //   const data = await response.json();
+  //   this.product = data;
 
-    // console.log(this.$route);
-  },
+  //   // console.log(this.$route);
+  // },
   data() {
     return {
       product: null,
     };
   },
+   created() {
+    const id = Number(this.$route.query.productId);
+
+    this.product = this.$store.getters["productStore/allProducts"].find(
+      p => p.id === id
+    );
+  }
 };
 </script>
 

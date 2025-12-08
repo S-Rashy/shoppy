@@ -10,6 +10,7 @@ import Shelf from "@/assets/shelf.svg";
 import HeartIcon from "@/assets/icons/HeartIcon.vue";
 import EyeIcon from "@/assets/icons/EyeIcon.vue";
 import MainButton from "@/slots/MainButton.vue";
+import ProductCard from "./ProductCard.vue";
 
 export default {
   components: {
@@ -19,48 +20,58 @@ export default {
     HeartIcon,
     EyeIcon,
     MainButton,
+    ProductCard,
+  },
+  created() {
+    this.$store.dispatch("productStore/fetchProducts");
   },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          name: "The north coat",
-          price: 260,
-          discount: 40,
-          image: Coat,
-          rate: 5,
-          count: 65,
-        },
-        {
-          id: 2,
-          name: "Gucci duffle bag",
-          price: 1160,
-          discount: 35,
-          image: Bag,
-          rate: 4.5,
-          count: 65,
-        },
-        {
-          id: 3,
-          name: "RGB liquid CPU Cooler",
-          price: 170,
-          discount: 30,
-          image: Cooler,
-          rate: 4.5,
-          count: 65,
-        },
-        {
-          id: 4,
-          name: "Small Bookshelf",
-          price: 360,
-          discount: 25,
-          image: Shelf,
-          rate: 5,
-          count: 99,
-        },
-      ],
+      // products: [
+      //   {
+      //     id: 1,
+      //     title: "The north coat",
+      //     price: 260,
+      //     discount: 40,
+      //     image: Coat,
+      //     rate: 5,
+      //     count: 65,
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "Gucci duffle bag",
+      //     price: 1160,
+      //     discount: 35,
+      //     image: Bag,
+      //     rate: 4.5,
+      //     count: 65,
+      //   },
+      //   {
+      //     id: 3,
+      //     title: "RGB liquid CPU Cooler",
+      //     price: 170,
+      //     discount: 30,
+      //     image: Cooler,
+      //     rate: 4.5,
+      //     count: 65,
+      //   },
+      //   {
+      //     id: 4,
+      //     title: "Small Bookshelf",
+      //     price: 360,
+      //     discount: 25,
+      //     image: Shelf,
+      //     rate: 5,
+      //     count: 99,
+      //   },
+      // ],
     };
+  },
+
+  computed: {
+    getProducts() {
+      return this.$store.state.productStore.products.slice(0, 4);
+    },
   },
 };
 </script>
@@ -77,8 +88,8 @@ export default {
       <MainButton class="w-[159px] h-[56px]"> View All </MainButton>
     </template>
 
-    <section class="grid grid-cols-4 mx-auto">
-      <div
+    <section class="grid grid-cols-4 mx-auto gap-6">
+      <!-- <div
         v-for="product in products"
         :key="product.id"
         class="w-[270px] group"
@@ -118,7 +129,17 @@ export default {
             >
           </p>
         </div>
-      </div>
+      </div> -->
+      <ProductCard
+        v-for="(product, index) in getProducts"
+        :key="index"
+        :product="{
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+        }"
+      />
     </section>
 
     <div class="flex my-10 justify-center">

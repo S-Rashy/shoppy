@@ -9,20 +9,28 @@ export default {
     ProductCard,
     MainButton
   },
-  async created() {
-    try {
-      const response = await fetch("https://fakestoreapi.com/products");
-      const data = await response.json();
-      this.products = data;
-    } catch (error) {
-      console.error("Error fetching users:", error);
+   created() {
+        this.$store.dispatch("productStore/fetchProducts");
+
+  //   try {
+  //     const response = await fetch("https://fakestoreapi.com/products");
+  //     const data = await response.json();
+  //     this.products = data;
+  //   } catch (error) {
+  //     console.error("Error fetching users:", error);
+  //   }
+   },
+  // data() {
+  //   return {
+  //     products: [],
+  //   };
+  // },
+  computed: {
+    allProducts(){
+      return this.$store.state.productStore.products.slice(4,12);
     }
   },
-  data() {
-    return {
-      products: [],
-    };
-  },
+  
 };
 </script>
 
@@ -45,8 +53,13 @@ export default {
    
 
     <section class="grid grid-cols-4 px-[20px] gap-6">
-      <ProductCard
+      <!-- <ProductCard
         v-for="(product, index) in products.slice(3, 11)"
+        :key="index"
+        :product="product"
+      /> -->
+      <ProductCard
+        v-for="(product, index) in allProducts"
         :key="index"
         :product="product"
       />
