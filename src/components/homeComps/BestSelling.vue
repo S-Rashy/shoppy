@@ -2,10 +2,6 @@
 import ArrowLeft from "@/assets/icons/ArrowLeft.vue";
 import ArrowRight from "@/assets/icons/ArrowRight.vue";
 import HomeSection from "@/slots/HomeSection.vue";
-import Coat from "@/assets/coat.svg";
-import Bag from "@/assets/bag.svg";
-import Cooler from "@/assets/cooler.svg";
-import Shelf from "@/assets/shelf.svg";
 
 import HeartIcon from "@/assets/icons/HeartIcon.vue";
 import EyeIcon from "@/assets/icons/EyeIcon.vue";

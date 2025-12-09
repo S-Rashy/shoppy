@@ -1,10 +1,9 @@
 <script>
-import CustomerIcon from "@/assets/icons/CustomerIcon.vue";
+import CustomerServiceIcon from "@/assets/icons/CustomerServiceIcon.vue";
 import DeliveryIcon from "@/assets/icons/DeliveryIcon.vue";
 import GuaranteeIcon from "@/assets/icons/GuaranteeIcon.vue";
 
 export default {
-  
   data() {
     return {
       features: [
@@ -16,7 +15,7 @@ export default {
         },
         {
           id: 2,
-          icon: CustomerIcon,
+          icon: CustomerServiceIcon,
           title: "24/7 customer service",
           details: "Friendly 24/7 customer support",
         },
@@ -33,7 +32,11 @@ export default {
 </script>
 <template>
   <section class="flex justify-center gap-20 my-30">
-    <div v-for="feature in features" :key="feature.id" class="flex flex-col gap-4 items-center">
+    <div
+      v-for="feature in features"
+      :key="feature.id"
+      class="flex flex-col gap-4 items-center"
+    >
       <div
         class="size-20 bg-[#2F2E30]/30 flex justify-center items-center rounded-full"
       >
@@ -44,8 +47,8 @@ export default {
         </div>
       </div>
       <div class="text-center space-y-2">
-          <p class="uppercase font-semibold text-[18px]">{{ feature.title }}</p>
-          <p class="text-sm">{{ feature.details }}</p>
+        <p class="uppercase font-semibold text-[18px]">{{ feature.title }}</p>
+        <p class="text-sm">{{ feature.details }}</p>
       </div>
     </div>
   </section>

@@ -7,6 +7,8 @@ import Homelayout from "@/layouts/HomepageLayout/Homelayout.vue";
 import Login from "@/components/authComps/Login.vue";
 import DetailsPage from "@/components/pages/DetailsPage.vue";
 import Account from "@/components/pages/Account.vue";
+import CartPage from "@/components/pages/CartPage.vue";
+import WishlistPage from "@/components/pages/WishlistPage.vue";
 
 export default [
   {
@@ -19,6 +21,8 @@ export default [
       { path: "contact", name: "ContactPage", component: Contact },
       {path: "product", name: "DetailsPage", component: DetailsPage},
       {path: "account", name: "AccountPage", component: Account},
+      {path: "cart", name: "CartPage", component: CartPage},
+      {path: "wishlist", name: "WishlistPage", component: WishlistPage},
       {
         path: "auth",
         name: "AuthPage",

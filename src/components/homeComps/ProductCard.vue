@@ -15,36 +15,46 @@ export default {
     HeartIcon,
     EyeIcon,
   },
-  
+  methods: {
+    addToCart(product) {
+      this.$store.dispatch("cartStore/appendToCart", product);
+    },
+
+    addToWishlist(product) {
+      this.$store.dispatch("wishlistStore/updateWishlist", product);
+    },
+  },
 };
 </script>
 
 <template>
-  <RouterLink
-    :to="{
-      path: '/product',
-      query: {
-        category: product.category,
-        productId: product.id,
-        name: product.title,
-      },
-    }"
-  >
+  <main>
     <div
       class="h-[250px] bg-[#F5F5F5] rounded-[4px] pt-4 flex flex-col justify-between relative overflow-hidden group"
     >
-      <div class="absolute inset-0 flex justify-center items-center p-4">
+      <RouterLink
+        :to="{
+          path: '/product',
+          query: {
+            category: product.category,
+            productId: product.id,
+            name: product.title,
+          },
+        }"
+        class="absolute inset-0 flex justify-center items-center p-4"
+      >
         <img
           :src="product.image"
           alt=""
           class="max-h-full max-w-full object-contain"
         />
-      </div>
+      </RouterLink>
 
       <div class="flex justify-end px-4 relative z-10">
         <div class="flex flex-col gap-1 items-center">
           <div
             class="rounded-[50%] bg-white size-8 text-white flex justify-center items-center cursor-pointer hover:text-red-500 transition-colors duration-200"
+            @click="addToWishlist(product)"
           >
             <HeartIcon />
           </div>
@@ -59,6 +69,7 @@ export default {
 
       <button
         class="bg-black text-white h-[41px] w-[270px] rounded-b-[4px] cursor-pointer translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out mx-auto relative z-10"
+        @click="addToCart(product)"
       >
         Add to Cart
       </button>
@@ -74,6 +85,6 @@ export default {
         </span>
       </p>
     </div>
-  </RouterLink>
+  </main>
 </template>
 <style lang="scss" scoped></style>

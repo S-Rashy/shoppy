@@ -45,6 +45,12 @@ export default {
     isLoggedIn() {
       return this.$store.getters["userStore/isLoggedIn"];
     },
+    cartCount() {
+      return this.$store.getters["cartStore/cartCount"];
+    },
+    wishlistCount() {
+      return this.$store.getters["wishlistStore/wishlistCount"];
+    },
   },
 };
 </script>
@@ -69,7 +75,10 @@ export default {
       >
         {{ route.name }}
       </RouterLink>
-      <RouterLink to="/auth/signup" v-if="!isLoggedIn" class="pb-1 border-b border-transparent"
+      <RouterLink
+        to="/auth/signup"
+        v-if="!isLoggedIn"
+        class="pb-1 border-b border-transparent"
         >Sign Up</RouterLink
       >
     </nav>
@@ -84,8 +93,28 @@ export default {
         <SearchIcon />
       </div>
       <div v-if="!isAuthPage" class="flex gap-6">
-        <HeartIcon class="text-white" />
-        <CartIcon />
+        <RouterLink to="/wishlist" class="relative">
+
+          
+          <p
+            class="text-white bg-[#DB4444] rounded-full size-4 text-[12px] text-center absolute bottom-7 right-0 z-20"
+            v-if="wishlistCount > 0"
+          >
+            {{ wishlistCount }}
+          </p>
+          <HeartIcon class="text-white relative z-10" />
+        </RouterLink>
+
+        <RouterLink to="/cart" class="relative">
+          <p
+            class="text-white bg-[#DB4444] rounded-full size-4 text-[12px] text-center absolute bottom-7 right-0 z-20"
+            v-if="cartCount > 0"
+          >
+            {{ cartCount }}
+          </p>
+          <CartIcon class="relative z-10" />
+        </RouterLink>
+
         <UserIcon
           @click="toggleDropdown"
           class="cursor-pointer rounded-[50%] hover:text-white hover:bg-[#DB4444] hover:scale-105 transition-transform duration-200"

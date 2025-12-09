@@ -1,30 +1,36 @@
 <script>
 import CustomerIcon from "@/assets/icons/CustomerIcon.vue";
-import DeliveryIcon from "@/assets/icons/DeliveryIcon.vue";
-import GuaranteeIcon from "@/assets/icons/GuaranteeIcon.vue";
+import DollarIcon from "@/assets/icons/DollarIcon.vue";
+import MoneyBagIcon from "@/assets/icons/MoneyBagIcon.vue";
+import SellerIcon from "@/assets/icons/SellerIcon.vue";
 
 export default {
-  
   data() {
     return {
       features: [
         {
           id: 1,
-          icon: DeliveryIcon,
-          title: "free and fast delivery",
-          details: "Free delivery for all orders over $40",
+          icon: SellerIcon,
+          title: "10.5k",
+          details: "Sellers active in our site",
         },
         {
           id: 2,
-          icon: CustomerIcon,
-          title: "24/7 customer service",
-          details: "Friendly 24/7 customer support",
+          icon: DollarIcon,
+          title: "33k",
+          details: "Monthly Product Sale",
         },
         {
           id: 3,
-          icon: GuaranteeIcon,
-          title: "money back guarantee",
-          details: "We return money within 30 days",
+          icon: CustomerIcon,
+          title: "45.5k",
+          details: "Customers active in our site",
+        },
+        {
+          id: 4,
+          icon: MoneyBagIcon,
+          title: "45k",
+          details: "Annual gross sale in our site",
         },
       ],
     };
@@ -32,20 +38,24 @@ export default {
 };
 </script>
 <template>
-  <section class="flex justify-center gap-20 my-30">
-    <div v-for="feature in features" :key="feature.id" class="flex flex-col gap-4 items-center">
+  <section class="flex justify-center gap-12 my-30">
+    <div
+      v-for="feature in features"
+      :key="feature.id"
+      class="flex flex-col gap-4 items-center justify-center w-[270px] h-[230px] rounded-[4px] border border-black/30 hover:text-white hover:bg-[#DB4444] transition-transform duration-200 group"
+    >
       <div
-        class="size-20 bg-[#2F2E30]/30 flex justify-center items-center rounded-full"
+        class="size-20 bg-[#2F2E30]/30 flex justify-center items-center rounded-full group-hover:bg-white/30"
       >
         <div
-          class="bg-black size-14 flex justify-center items-center rounded-full"
+          class="bg-black text-white size-14 flex justify-center items-center rounded-full group-hover:bg-white group-hover:text-black"
         >
-          <component :is="feature.icon" class="border" />
+          <component :is="feature.icon" />
         </div>
       </div>
       <div class="text-center space-y-2">
-          <p class="uppercase font-semibold text-[18px]">{{ feature.title }}</p>
-          <p class="text-sm">{{ feature.details }}</p>
+        <p class="font-bold text-[30px]">{{ feature.title }}</p>
+        <p >{{ feature.details }}</p>
       </div>
     </div>
   </section>
