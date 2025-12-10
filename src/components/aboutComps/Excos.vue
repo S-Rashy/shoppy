@@ -17,10 +17,12 @@ export default {
 
 <template>
     <main class="flex items-center justify-center gap-12">
-        <div v-for="exco in excos" :key="exco.id" class="w-[370px] h-[564px]">
+        <div v-for="exco in excos" :key="exco.id" class="w-[370px] h-[564px] space-y-3">
             <img :src="exco.img" alt="">
-            <h4>{{ exco.name }}</h4>
-            <p>{{ exco.title }}</p>
+            <div>
+                <h4>{{ exco.name }}</h4>
+                <p>{{ exco.title }}</p>
+            </div>
             <div class="">
                 <img src="../../assets/instagram.svg" alt="">
             </div>

@@ -31,7 +31,7 @@ export default {
 };
 </script>
 <template>
-  <section class="flex justify-center gap-20 my-30">
+  <section class="flex justify-center gap-20 my-20">
     <div
       v-for="feature in features"
       :key="feature.id"

@@ -9,10 +9,10 @@ export const productStore = {
     return {
       products: [],
        moreProducts: [
-        { id: 21, title: "The north coat", price: 260, discount: 40, image: Coat, rate: 5, count: 65, },
-        { id: 22, title: "Gucci duffle bag", price: 1160, discount: 35, image: Bag, rate: 4.5, count: 65, },
-        { id: 23, title: "RGB liquid CPU Cooler", price: 170, discount: 30, image: Cooler, rate: 4.5, count: 65 },
-        { id: 24, title: "Small Bookshelf", price: 360, discount: 25, image: Shelf, rate: 5, count: 99 },
+        { id: 21, title: "The north coat", price: 260, discount: 40, image: Coat, rating: { rate: 5, count: 65,} },
+        { id: 22, title: "Gucci duffle bag", price: 1160, discount: 35, image: Bag, rating:{ rate: 4.5, count: 65,} },
+        { id: 23, title: "RGB liquid CPU Cooler", price: 170, discount: 30, image: Cooler, rating:{ rate: 4.5, count: 65} },
+        { id: 24, title: "Small Bookshelf", price: 360, discount: 25, image: Shelf, rating:{ rate: 5, count: 99 }},
       ]
     };
   },

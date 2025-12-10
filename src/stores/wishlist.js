@@ -30,5 +30,15 @@ export const wishlistStore = {
         commit("addToWishlist", product);
       }
     },
+    toggleWishlist({ state, commit }, product) {
+      const existingItem = state.wishlist.find(
+        (item) => item.id === product.id
+      );
+      if (existingItem) {
+        commit("removeFromWishlist", product.id);
+      } else {
+        commit("addToWishlist", product);
+      }
+    },
   },
 };

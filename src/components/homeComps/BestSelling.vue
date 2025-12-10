@@ -129,12 +129,7 @@ export default {
       <ProductCard
         v-for="(product, index) in getProducts"
         :key="index"
-        :product="{
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          image: product.image,
-        }"
+        :product="product"
       />
     </section>
 

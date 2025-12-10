@@ -1,4 +1,6 @@
 <script>
+import PageHeader from "@/slots/PageHeader.vue";
+
 export default {
   // async mounted() {
   //   const id = this.$route.query.productId;
@@ -8,6 +10,9 @@ export default {
 
   //   // console.log(this.$route);
   // },
+  components: {
+    PageHeader,
+  },
   data() {
     return {
       product: null,
@@ -25,6 +30,10 @@ export default {
 
 <template>
   <main v-if="product" class="p-12">
+    <PageHeader>
+      <template #path>Home/ {{ product.category }}</template>
+      <template #page>{{ product.title }}</template>
+    </PageHeader>
     <section class="flex gap-6">
       <section class="grid grid-cols-1 gap-5 max-w-[55%]">
         <div
@@ -76,7 +85,11 @@ export default {
     </section>
 
     <section>
-      <h2>{{ product.title }}</h2>
+      <h2 class="text-[24px] font-semibold">{{ product.title }}</h2>
+      <p>{{ product.rating.rate }}</p>
+      <p>{{ product.rating.count }}</p>
+      <h4>${{ product.price }}</h4>
+      <p></p>
     </section>
   </main>
 </template>

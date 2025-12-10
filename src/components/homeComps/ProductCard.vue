@@ -15,13 +15,20 @@ export default {
     HeartIcon,
     EyeIcon,
   },
+  computed: {
+    isInWishlist() {
+      return this.$store.getters["wishlistStore/wishlistItems"].some(
+        (item) => item.id === this.product.id
+      );
+    },
+  },
   methods: {
     addToCart(product) {
       this.$store.dispatch("cartStore/appendToCart", product);
     },
 
-    addToWishlist(product) {
-      this.$store.dispatch("wishlistStore/updateWishlist", product);
+   toggleWishlist(product) {
+      this.$store.dispatch("wishlistStore/toggleWishlist", product);
     },
   },
 };
@@ -53,8 +60,11 @@ export default {
       <div class="flex justify-end px-4 relative z-10">
         <div class="flex flex-col gap-1 items-center">
           <div
-            class="rounded-[50%] bg-white size-8 text-white flex justify-center items-center cursor-pointer hover:text-red-500 transition-colors duration-200"
-            @click="addToWishlist(product)"
+            :class="[
+              'rounded-[50%] bg-white size-8 flex justify-center items-center cursor-pointer transition-colors duration-200',
+              isInWishlist ? 'text-red-500' : 'text-white hover:text-red-500',
+            ]"
+            @click="toggleWishlist(product)"
           >
             <HeartIcon />
           </div>
@@ -84,6 +94,15 @@ export default {
           ${{ product.price.toFixed(2) }}
         </span>
       </p>
+      
+      <div class="flex items-center gap-2">
+        <div class="flex gap-1">
+          <span v-for="star in 5" :key="star" class="text-[#FFAD33]">
+            {{ star <= Math.floor(product.rating?.rate || 0) ? '★' : '☆' }}
+          </span>
+        </div>
+        <span class="text-sm text-black/50">({{ product.rating?.count || 0 }})</span>
+      </div>
     </div>
   </main>
 </template>

@@ -2,12 +2,14 @@
 import PageHeader from "@/slots/PageHeader.vue";
 import ActiveSellers from "./ActiveSellers.vue";
 import Excos from "./Excos.vue";
+import FreeAndFast from "../homeComps/FreeAndFast.vue";
 
 export default {
   components: {
     PageHeader,
     ActiveSellers,
-    Excos
+    Excos,
+    FreeAndFast
   },
 };
 </script>
@@ -46,6 +48,7 @@ export default {
 
     <ActiveSellers />
     <Excos/>
+    <FreeAndFast/>
   </main>
 </template>
 
