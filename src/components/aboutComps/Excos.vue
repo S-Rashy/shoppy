@@ -20,11 +20,11 @@ export default {
         <div v-for="exco in excos" :key="exco.id" class="w-[370px] h-[564px] space-y-3">
             <img :src="exco.img" alt="">
             <div>
-                <h4>{{ exco.name }}</h4>
+                <h4 class="text-[30px]">{{ exco.name }}</h4>
                 <p>{{ exco.title }}</p>
             </div>
             <div class="">
-                <img src="../../assets/instagram.svg" alt="">
+                <img src="../../assets/social.png" alt="">
             </div>
 
         </div>

@@ -81,7 +81,9 @@ export default {
           Best Selling Products
         </h3>
       </div>
-      <MainButton class="w-[159px] h-[56px]"> View All </MainButton>
+      <RouterLink to="/allProducts">
+        <MainButton class="w-[159px] h-[56px]"> View All </MainButton>
+      </RouterLink>
     </template>
 
     <section class="grid grid-cols-4 mx-auto gap-6">
@@ -133,9 +135,9 @@ export default {
       />
     </section>
 
-    <div class="flex my-10 justify-center">
+    <RouterLink to="/allProducts" class="flex my-10 justify-center">
       <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
-    </div>
+    </RouterLink>
   </HomeSection>
 </template>
 

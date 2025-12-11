@@ -28,5 +28,11 @@ export const userStore = {
       localStorage.setItem("userData", JSON.stringify(userData));
       commit("updateUser", userData);
     },
+    logoutUser(){
+      localStorage.removeItem("userData");
+      console.log("user out");
+      
+    }
   },
+
 };

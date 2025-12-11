@@ -20,6 +20,9 @@ export const wishlistStore = {
     removeFromWishlist(state, id) {
       state.wishlist = state.wishlist.filter((item) => item.id !== id);
     },
+    clearWishlist(state) {
+    state.wishlist = [];  
+  }
   },
   actions: {
     updateWishlist({ state, commit }, product) {

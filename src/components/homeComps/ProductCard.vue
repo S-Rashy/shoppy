@@ -4,6 +4,12 @@ import HeartIcon from "@/assets/icons/HeartIcon.vue";
 
 export default {
   name: "ProductCard",
+  data() {
+    return {
+      showToast: false,
+      toastMessage: "",
+    };
+  },
 
   props: {
     product: {
@@ -16,19 +22,33 @@ export default {
     EyeIcon,
   },
   computed: {
+    wishlist() {
+      return this.$store.getters["wishlistStore/wishlistItems"];
+    },
     isInWishlist() {
-      return this.$store.getters["wishlistStore/wishlistItems"].some(
-        (item) => item.id === this.product.id
-      );
+      return this.wishlist.some((item) => item.id === this.product.id);
     },
   },
   methods: {
+    toast(message) {
+      this.toastMessage = message;
+      this.showToast = true;
+      setTimeout(() => {
+        this.showToast = false;
+      }, 3000);
+    },
     addToCart(product) {
       this.$store.dispatch("cartStore/appendToCart", product);
+      this.toast("Item added to cart");
     },
 
-   toggleWishlist(product) {
+    toggleWishlist(product) {
       this.$store.dispatch("wishlistStore/toggleWishlist", product);
+      this.toast(
+        this.isInWishlist
+          ? "Item added to wishlist"
+          : "Item removed from wishlist"
+      );
     },
   },
 };
@@ -36,6 +56,20 @@ export default {
 
 <template>
   <main>
+    <div
+      class="fixed top-0 left-0 w-full flex justify-center text-[#DB4444] bg-transparent text-center z-50"
+    >
+      <p
+        class="bg-white px-6 py-4 rounded-lg shadow-lg w-90 mx-auto transform transition-all duration-300 ease-out"
+        :class="
+          showToast
+            ? 'translate-y-0 opacity-100'
+            : '-translate-y-full opacity-0'
+        "
+      >
+        {{ toastMessage }}
+      </p>
+    </div>
     <div
       class="h-[250px] bg-[#F5F5F5] rounded-[4px] pt-4 flex flex-col justify-between relative overflow-hidden group"
     >
@@ -94,14 +128,16 @@ export default {
           ${{ product.price.toFixed(2) }}
         </span>
       </p>
-      
+
       <div class="flex items-center gap-2">
         <div class="flex gap-1">
           <span v-for="star in 5" :key="star" class="text-[#FFAD33]">
-            {{ star <= Math.floor(product.rating?.rate || 0) ? '★' : '☆' }}
+            {{ star <= Math.floor(product.rating?.rate || 0) ? "★" : "☆" }}
           </span>
         </div>
-        <span class="text-sm text-black/50">({{ product.rating?.count || 0 }})</span>
+        <span class="text-sm text-black/50"
+          >({{ product.rating?.count || 0 }})</span
+        >
       </div>
     </div>
   </main>

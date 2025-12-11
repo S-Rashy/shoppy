@@ -4,6 +4,10 @@ import HeartIcon from "@/assets/icons/HeartIcon.vue";
 import SearchIcon from "@/assets/icons/SearchIcon.vue";
 import UserIcon from "@/assets/icons/UserIcon.vue";
 import TopHeader from "./TopHeader.vue";
+import OrderIcon from "@/assets/icons/OrderIcon.vue";
+import CancelIcon from "@/assets/icons/CancelIcon.vue";
+import StarIcon from "@/assets/icons/StarIcon.vue";
+import LogoutIcon from "@/assets/icons/LogoutIcon.vue";
 
 export default {
   name: "Homeheader",
@@ -13,6 +17,10 @@ export default {
     CartIcon,
     UserIcon,
     TopHeader,
+    OrderIcon,
+    CancelIcon,
+    StarIcon,
+    LogoutIcon,
   },
   data() {
     return {
@@ -33,8 +41,9 @@ export default {
     },
 
     logout() {
-      localStorage.removeItem("userData");
+      this.$store.dispatch("userStore/logoutUser");
       this.$router.push({ name: "AuthPage" });
+
       this.toggleDropdown();
     },
   },
@@ -68,7 +77,7 @@ export default {
         :key="route.path"
         :to="route.path"
         @click="isActive(route.path)"
-        class="pb-1 border-b border-transparent"
+        class="pb-1 border-b border-transparent hover:scale-110 hover:font-medium transition-all duration-200 ease-in"
         :class="{
           'border-b-black/50': isActive(route.path),
         }"
@@ -94,15 +103,15 @@ export default {
       </div>
       <div v-if="!isAuthPage" class="flex gap-6">
         <RouterLink to="/wishlist" class="relative">
-
-          
           <p
             class="text-white bg-[#DB4444] rounded-full size-4 text-[12px] text-center absolute bottom-7 right-0 z-20"
             v-if="wishlistCount > 0"
           >
             {{ wishlistCount }}
           </p>
-          <HeartIcon class="text-white relative z-10" />
+          <HeartIcon
+            class="text-white relative z-10 hover:scale-120 font-semibold transition-all duration-200 ease-in"
+          />
         </RouterLink>
 
         <RouterLink to="/cart" class="relative">
@@ -112,7 +121,9 @@ export default {
           >
             {{ cartCount }}
           </p>
-          <CartIcon class="relative z-10" />
+          <CartIcon
+            class="relative z-10 hover:scale-120 font-semibold transition-all duration-200 ease-in"
+          />
         </RouterLink>
 
         <UserIcon
@@ -124,41 +135,46 @@ export default {
 
       <div
         v-if="showDropdown"
-        class="absolute right-17 mt-10 w-50 rounded-[4px] text-sm py-3 px-2 shadow overflow-hidden z-50 text-white bg-[rgba(0,0,0,0.04)] backdrop-blur-[150px]"
+        class="absolute right-17 mt-10 w-55 rounded-[4px] text-sm py-3 px-2 shadow overflow-hidden z-50 text-white bg-[rgba(0,0,0,0.04)] backdrop-blur-[150px]"
       >
         <RouterLink to="/account" @click="toggleDropdown">
           <div
-            class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+            class="w-full px-3 py-2 flex items-center gap-1 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
           >
-            Manage My Account
+            <UserIcon />
+            <p>Manage My Account</p>
           </div></RouterLink
         >
         <RouterLink to="/order" @click="toggleDropdown">
           <div
-            class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+            class="w-full px-4 py-2 flex items-center gap-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
           >
-            My Orders
+            <OrderIcon />
+            <p>My Orders</p>
           </div></RouterLink
         >
         <RouterLink to="/cancellations" @click="toggleDropdown">
           <div
-            class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+            class="w-full px-4 py-2 flex items-center gap-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
           >
-            My Cancellations
+            <CancelIcon />
+            <p>My Cancellations</p>
           </div></RouterLink
         >
         <RouterLink to="/reviews" @click="toggleDropdown">
           <div
-            class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+            class="w-full px-4 py-2 flex items-center gap-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
           >
-            My Reviews
+            <StarIcon />
+            <p>My Reviews</p>
           </div></RouterLink
         >
         <div
           @click="logout"
-          class="w-full px-4 py-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
+          class="w-full px-4 py-2 flex items-center gap-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
         >
-          Logout
+          <LogoutIcon />
+          <p>Logout</p>
         </div>
       </div>
     </main>

@@ -2,12 +2,19 @@
 import CartIcon from "@/assets/icons/CartIcon.vue";
 import DeleteIcon from "@/assets/icons/DeleteIcon.vue";
 import WButton from "@/slots/WButton.vue";
+import WishlistModal from "../modals/WishlistModal.vue";
 
 export default {
   components: {
     DeleteIcon,
     WButton,
     CartIcon,
+    WishlistModal,
+  },
+  data() {
+    return {
+      showModal: false,
+    };
   },
   computed: {
     wishlist() {
@@ -24,6 +31,15 @@ export default {
     addToCart(product) {
       this.$store.dispatch("cartStore/appendToCart", product);
     },
+    openModal() {
+      this.wishlist.forEach((product) => this.addToCart(product));
+      this.showModal = true;
+      
+    },
+    closeModal() {
+      this.$store.commit("wishlistStore/clearWishlist");
+      this.showModal = false;
+    },
   },
 };
 </script>
@@ -32,7 +48,9 @@ export default {
   <main class="px-15 py-12">
     <div class="flex justify-between my-6">
       <h3 class="text-[20px]">Wishlist ({{ wishlistLength }})</h3>
-      <WButton v-if="wishlistLength > 0"> Move All To Bag</WButton>
+      <WButton v-if="wishlistLength > 0" @click="openModal">
+        Move All To Bag</WButton
+      >
     </div>
 
     <section class="grid grid-cols-4 gap-6 mx-auto">
@@ -81,7 +99,10 @@ export default {
         </div>
       </div>
     </section>
-    <p v-if="wishlistLength <= 0" class="text-center"> No items have been added to your wishlist</p>
+    <p v-if="wishlistLength <= 0" class="text-center">
+      No items have been added to your wishlist
+    </p>
+    <WishlistModal v-if="showModal" @close-modal="closeModal" />
   </main>
 </template>
 

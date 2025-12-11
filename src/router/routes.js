@@ -10,6 +10,7 @@ import Account from "@/components/pages/Account.vue";
 import CartPage from "@/components/pages/CartPage.vue";
 import WishlistPage from "@/components/pages/WishlistPage.vue";
 import CheckOut from "@/components/pages/CheckOut.vue";
+import AllProducts from "@/components/pages/AllProducts.vue";
 
 export default [
   {
@@ -21,6 +22,7 @@ export default [
       { path: "about", name: "AboutPage", component: About },
       { path: "contact", name: "ContactPage", component: Contact },
       {path: "product", name: "DetailsPage", component: DetailsPage},
+      {path: "allProducts", name: "AllProducts", component: AllProducts},
       {path: "account", name: "AccountPage", component: Account},
       {path: "cart", name: "CartPage", component: CartPage},
       {path: "wishlist", name: "WishlistPage", component: WishlistPage},

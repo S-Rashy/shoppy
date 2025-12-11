@@ -38,7 +38,7 @@ export default {
       <template #page>Cart</template>
     </PageHeader>
 
-    <section v-if="product">
+    <section v-if="cart.length>0" >
       <div
         class="w-[1170px] h-[72px] rounded-[4px] shadow-sm px-8 flex justify-between items-center mt-6"
       >
@@ -117,14 +117,14 @@ export default {
             <p>Total:</p>
             <p>${{ total }}</p>
           </span>
-          <div class="flex justify-center mt-4">
+          <RouterLink to="/checkout" class="flex justify-center mt-4">
             <MainButton class="w-[260px] h-[56px] ">Proceed to checkout</MainButton>
-          </div>
+          </RouterLink>
         </div>
       </section>
     </section>
 
-    <p v-if="!product" class="text-center"> Your cart is currently empty</p>
+    <p v-else class="text-center"> Your cart is currently empty</p>
   </main>
 </template>
 <style scoped>

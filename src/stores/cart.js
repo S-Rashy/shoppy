@@ -39,8 +39,11 @@ export const cartStore = {
     removeFromCart(state, id) {
       state.cart = state.cart.filter((item) => item.id !== id);
     },
+    clearCart(state) {
+      state.cart = [];
+    },
   },
-  
+
   actions: {
     appendToCart({ state, commit }, product) {
       const existingItem = state.cart.find((item) => item.id === product.id);
