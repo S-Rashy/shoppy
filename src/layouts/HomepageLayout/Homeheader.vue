@@ -8,6 +8,7 @@ import OrderIcon from "@/assets/icons/OrderIcon.vue";
 import CancelIcon from "@/assets/icons/CancelIcon.vue";
 import StarIcon from "@/assets/icons/StarIcon.vue";
 import LogoutIcon from "@/assets/icons/LogoutIcon.vue";
+import LogoutModal from "@/components/modals/LogoutModal.vue";
 
 export default {
   name: "Homeheader",
@@ -21,10 +22,12 @@ export default {
     CancelIcon,
     StarIcon,
     LogoutIcon,
+    LogoutModal,
   },
   data() {
     return {
       showDropdown: false,
+      showModal: false,
       routes: [
         { name: "Home", path: "/" },
         { name: "Contact", path: "/contact" },
@@ -39,12 +42,12 @@ export default {
     toggleDropdown() {
       this.showDropdown = !this.showDropdown;
     },
-
-    logout() {
-      this.$store.dispatch("userStore/logoutUser");
-      this.$router.push({ name: "AuthPage" });
-
-      this.toggleDropdown();
+     openModal() {
+      this.showModal = true;
+      this.showDropdown = false;
+    },
+    closeModal() {
+      this.showModal = false;
     },
   },
   computed: {
@@ -170,7 +173,7 @@ export default {
           </div></RouterLink
         >
         <div
-          @click="logout"
+        @click="openModal"
           class="w-full px-4 py-2 flex items-center gap-2 rounded hover:bg-white/20 hover:backdrop-blur-[160px] transition-all duration-200 cursor-pointer"
         >
           <LogoutIcon />
@@ -178,6 +181,7 @@ export default {
         </div>
       </div>
     </main>
+    <LogoutModal v-if="showModal" @close="closeModal" />
   </header>
 </template>
 

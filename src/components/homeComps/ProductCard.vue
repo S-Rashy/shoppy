@@ -16,6 +16,10 @@ export default {
       type: Object,
       required: true,
     },
+     showDiscount: {
+      type: Boolean,
+      default: false, 
+    },
   },
   components: {
     HeartIcon,
@@ -35,7 +39,7 @@ export default {
       this.showToast = true;
       setTimeout(() => {
         this.showToast = false;
-      }, 3000);
+      }, 2000);
     },
     addToCart(product) {
       this.$store.dispatch("cartStore/appendToCart", product);
@@ -63,7 +67,7 @@ export default {
         class="bg-white px-6 py-4 rounded-lg shadow-lg w-90 mx-auto transform transition-all duration-300 ease-out"
         :class="
           showToast
-            ? 'translate-y-0 opacity-100'
+            ? 'translate-y-6 opacity-100'
             : '-translate-y-full opacity-0'
         "
       >
@@ -91,7 +95,12 @@ export default {
         />
       </RouterLink>
 
-      <div class="flex justify-end px-4 relative z-10">
+      <div class="flex justify-end gap-40 px-4 relative z-10">
+        <div v-if="showDiscount && product.discount"
+          class="bg-[#DB4444] text-white text-xs text-center py-1 rounded-[4px] w-[55px] h-[26px]"
+        >
+          - {{ product.discount }}%
+        </div>
         <div class="flex flex-col gap-1 items-center">
           <div
             :class="[

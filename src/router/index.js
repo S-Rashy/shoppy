@@ -11,7 +11,9 @@ router.beforeEach((to, from, next) => {
   const userData = storedUser ? JSON.parse(storedUser) : null;
   const isAuthenticated = userData?.isLoggedIn;
   
-   if (to.meta.requiresGuest && isAuthenticated) {
+   if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: "AuthPage" });
+  } else if (to.meta.requiresGuest && isAuthenticated) {
     next({ name: "HomePage" });
   } else {
     next();

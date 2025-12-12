@@ -27,9 +27,14 @@ export default {
     <div class="bg-white h-59 w-120 py-12 px-12 space-y-8 text-center">
       <h5><slot name="info"></slot></h5>
 
-      <RouterLink :to="to">
-        <MainButton @click="close"><slot name="btn"></slot> </MainButton>
-      </RouterLink>
+      <slot name="button">
+        <RouterLink :to="to">
+          <MainButton @click="close"><slot name="btn"></slot> </MainButton>
+        </RouterLink>
+      </slot>
+      <slot>
+
+      </slot>
     </div>
   </div>
 </template>

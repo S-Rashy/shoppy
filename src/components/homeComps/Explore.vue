@@ -7,35 +7,23 @@ export default {
   components: {
     HomeSection,
     ProductCard,
-    MainButton
+    MainButton,
   },
-   created() {
-        this.$store.dispatch("productStore/fetchProducts");
+  created() {
+    this.$store.dispatch("productStore/fetchProducts");
 
-  //   try {
-  //     const response = await fetch("https://fakestoreapi.com/products");
-  //     const data = await response.json();
-  //     this.products = data;
-  //   } catch (error) {
-  //     console.error("Error fetching users:", error);
-  //   }
-   },
-  // data() {
-  //   return {
-  //     products: [],
-  //   };
-  // },
-  computed: {
-    allProducts(){
-      return this.$store.state.productStore.products.slice(4,12);
-    }
   },
-  
+ 
+  computed: {
+    allProducts() {
+      return this.$store.state.productStore.products.slice(8, 16);
+    },
+  },
 };
 </script>
 
 <template>
-  <HomeSection> 
+  <HomeSection>
     <template #title> Our Products </template>
 
     <template #details>
@@ -46,31 +34,22 @@ export default {
       </div>
     </template>
 
-
-   
-  <section class="p-[30px] max-w-[1440px] mx-auto">
-
-   
-
-    <section class="grid grid-cols-4 px-[20px] gap-6">
-      <!-- <ProductCard
-        v-for="(product, index) in products.slice(3, 11)"
-        :key="index"
-        :product="product"
-      /> -->
-      <ProductCard
-        v-for="(product, index) in allProducts"
-        :key="index"
-        :product="product"
-      />
+    <section class="p-[30px] max-w-[1440px] mx-auto">
+      <section class="grid grid-cols-4 px-[20px] gap-6">
+       
+        <ProductCard
+          v-for="(product, index) in allProducts"
+          :key="index"
+          :product="product"
+        />
+      </section>
     </section>
-  </section>
 
-   <div class="flex my-10 justify-center">
-      <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
+    <div class="flex my-10 justify-center">
+      <RouterLink to="/allProducts">
+        <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
+      </RouterLink>
     </div>
-
-
   </HomeSection>
 </template>
 

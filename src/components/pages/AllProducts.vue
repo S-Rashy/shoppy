@@ -37,11 +37,11 @@ export default {
 <template>
   <main class="px-15">
       <HomeSection>
-        <template #title> This Month </template>
+        <template #title> Recently viewed </template>
         <template #details>
           <div>
             <h3 class="text-3xl font-semibold tracking-[1px]">
-              Best Selling Products
+              Products
             </h3>
           </div>
         </template>
