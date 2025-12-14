@@ -130,6 +130,7 @@ export default {
 
     <div class="my-4 flex flex-col gap-2">
       <h4 class="font-medium truncate">{{ product.title }}</h4>
+      <h4 class="font-medium truncate text-red-500">{{ product.category }}</h4>
 
       <p class="text-[#DB4444]">
         ${{ (product.price - product.price * 0.1).toFixed(2) }}
