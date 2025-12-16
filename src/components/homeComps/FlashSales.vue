@@ -16,56 +16,45 @@ export default {
     HeartIcon,
     EyeIcon,
     MainButton,
-    ProductCard
+    ProductCard,
   },
   created() {
     this.$store.dispatch("productStore/fetchProducts");
+    this.timer = setInterval(() => {
+      if (this.totalSeconds > 0) {
+        this.totalSeconds--;
+      }
+    }, 1000);
   },
   data() {
     return {
-      // products: [
-      //   {
-      //     id: 1,
-      //     name: "HAVIT HV-G92 Gamepad",
-      //     price: 160,
-      //     discount: 40,
-      //     image: Gamepad,
-      //     rate: 5,
-      //     count: 88,
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "AK-900 Wired Keyboard",
-      //     price: 1160,
-      //     discount: 35,
-      //     image: Keyboard,
-      //     rate: 4,
-      //     count: 75,
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "IPS LCD Gaming Monitor",
-      //     price: 400,
-      //     discount: 30,
-      //     image: Monitor,
-      //     rate: 5,
-      //     count: 99,
-      //   },
-      //   {
-      //     id: 4,
-      //     name: "S-Series Comfort Chair ",
-      //     price: 400,
-      //     discount: 25,
-      //     image: Chair,
-      //     rate: 4.5,
-      //     count: 99,
-      //   },
-      // ],
+      totalSeconds: 269200,
+      timer: null,
     };
   },
   computed: {
     getProducts() {
       return this.$store.state.productStore.products.slice(4, 8);
+    },
+    days() {
+      return Math.floor(this.totalSeconds / 86400);
+    },
+    hours() {
+      return Math.floor((this.totalSeconds % 86400) / 3600);
+    },
+    minutes() {
+      return Math.floor((this.totalSeconds % 3600) / 60);
+    },
+    seconds() {
+      return this.totalSeconds % 60;
+    },
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
+  methods: {
+    padZero(num) {
+      return num.toString().padStart(2, "0");
     },
   },
 };
@@ -80,22 +69,30 @@ export default {
         <section class="flex items-end gap-3">
           <div class="flex flex-col items-start w-10">
             <p class="text-xs">Days</p>
-            <h3 class="text-2xl font-bold tracking-[4px]">03</h3>
+            <h3 class="text-2xl font-bold tracking-[4px]">
+              {{ padZero(days) }}
+            </h3>
           </div>
           <p class="text-2xl font-bold text-[#E07575]">:</p>
           <div class="flex flex-col items-start w-10">
             <p class="text-xs">Hours</p>
-            <h3 class="text-2xl font-bold tracking-[4px]">23</h3>
+            <h3 class="text-2xl font-bold tracking-[4px]">
+              {{ padZero(hours) }}
+            </h3>
           </div>
           <p class="text-2xl font-bold text-[#E07575]">:</p>
           <div class="flex flex-col items-start w-10">
             <p class="text-xs">Minutes</p>
-            <h3 class="text-2xl font-bold tracking-[4px]">19</h3>
+            <h3 class="text-2xl font-bold tracking-[4px]">
+              {{ padZero(minutes) }}
+            </h3>
           </div>
           <p class="text-2xl font-bold text-[#E07575]">:</p>
           <div class="flex flex-col items-start w-10">
             <p class="text-xs">Seconds</p>
-            <h3 class="text-2xl font-bold tracking-[4px]">56</h3>
+            <h3 class="text-2xl font-bold tracking-[4px]">
+              {{ padZero(seconds) }}
+            </h3>
           </div>
         </section>
       </div>
@@ -126,6 +123,7 @@ export default {
       <RouterLink to="/allProducts" class="flex my-10 justify-center">
         <MainButton class="w-[234px] h-[56px]"> View All Products </MainButton>
       </RouterLink>
+     
     </div>
   </HomeSection>
 </template>

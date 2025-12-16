@@ -43,7 +43,7 @@ export default {
         <div
           class="bg-black size-14 flex justify-center items-center rounded-full"
         >
-          <component :is="feature.icon" class="border" />
+          <component :is="feature.icon" class=" text-white" />
         </div>
       </div>
       <div class="text-center space-y-2">

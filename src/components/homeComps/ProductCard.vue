@@ -16,9 +16,9 @@ export default {
       type: Object,
       required: true,
     },
-     showDiscount: {
+    showDiscount: {
       type: Boolean,
-      default: false, 
+      default: false,
     },
   },
   components: {
@@ -96,7 +96,8 @@ export default {
       </RouterLink>
 
       <div class="flex justify-end gap-40 px-4 relative z-10">
-        <div v-if="showDiscount && product.discount"
+        <div
+          v-if="showDiscount && product.discount"
           class="bg-[#DB4444] text-white text-xs text-center py-1 rounded-[4px] w-[55px] h-[26px]"
         >
           - {{ product.discount }}%
@@ -130,8 +131,6 @@ export default {
 
     <div class="my-4 flex flex-col gap-2">
       <h4 class="font-medium truncate">{{ product.title }}</h4>
-      <h4 class="font-medium truncate text-red-500">{{ product.category }}</h4>
-
       <p class="text-[#DB4444]">
         ${{ (product.price - product.price * 0.1).toFixed(2) }}
         <span class="line-through text-black/50 ml-2">

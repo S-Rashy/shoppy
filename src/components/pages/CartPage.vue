@@ -2,12 +2,14 @@
 import ArrowDown from "@/assets/icons/ArrowDown.vue";
 import MainButton from "@/slots/MainButton.vue";
 import PageHeader from "@/slots/PageHeader.vue";
+import WButton from "@/slots/WButton.vue";
 
 export default {
   components: {
     PageHeader,
     ArrowDown,
-    MainButton
+    MainButton,
+    WButton
   },
   computed: {
     cart() {
@@ -88,15 +90,15 @@ export default {
       </div>
       <div class="mt-6 flex justify-between">
         <RouterLink to="/"
-          ><button
+          ><WButton
             class="w-[218px] h-[56px] rounded-[4px] border border-black/50"
           >
             Return To Shop
-          </button></RouterLink
+          </WButton></RouterLink
         >
-        <button class="w-[218px] h-[56px] rounded-[4px] border border-black/50">
+        <WButton class="w-[218px] h-[56px] rounded-[4px] border border-black/50">
           Update Cart
-        </button>
+        </WButton>
       </div>
       <section class="flex justify-between mt-10">
         <div class="flex gap-4">

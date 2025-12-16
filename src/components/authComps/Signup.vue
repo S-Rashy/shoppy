@@ -1,9 +1,11 @@
 <script>
 import MainButton from "@/slots/MainButton.vue";
+import WButton from "@/slots/WButton.vue";
 
 export default {
   components: {
     MainButton,
+    WButton
   },
   data() {
     return {
@@ -13,7 +15,6 @@ export default {
    methods: {
     handleSignup() {
       this.$store.dispatch("userStore/setUser", this.firstName);
-
       this.$router.push({ name: "HomePage" });
     }
   }
@@ -47,12 +48,12 @@ export default {
 
       <div class="space-y-4 mx-auto">
         <MainButton @click.prevent="handleSignup">Create Account</MainButton>
-        <button
-          class="w-90 h-14 rounded-[4px] border border-black/40 flex justify-center items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-1 hover:shadow-lg hover:border-2"
+        <WButton
+          class="w-90 h-14 flex items-center justify-center gap-8"
         >
           <img src="../../assets/Google.svg" alt="" />
           Sign up with Google
-        </button>
+        </WButton>
       </div>
     </form>
 

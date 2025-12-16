@@ -1,39 +1,53 @@
 <script>
+import DeliveryIcon from "@/assets/icons/DeliveryIcon.vue";
 import HeartIcon from "@/assets/icons/HeartIcon.vue";
+import ReturnIcon from "@/assets/icons/ReturnIcon.vue";
 import MainButton from "@/slots/MainButton.vue";
 import PageHeader from "@/slots/PageHeader.vue";
 
 export default {
-  // async mounted() {
-  //   const id = this.$route.query.productId;
-  //   const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-  //   const data = await response.json();
-  //   this.product = data;
-
-  //   // console.log(this.$route);
-  // },
   components: {
     PageHeader,
     HeartIcon,
-    MainButton
+    MainButton,
+    DeliveryIcon,
+    ReturnIcon,
   },
   data() {
     return {
       product: null,
       selectedSize: "M",
-
       sizes: ["XS", "S", "M", "L", "XL"],
       quantity: 1,
+      showToast: false,
+      toastMessage: "",
     };
   },
   created() {
     const id = Number(this.$route.query.productId);
-
     this.product = this.$store.getters["productStore/allProducts"].find(
       (p) => p.id === id
     );
   },
+  computed: {
+    wishlist() {
+      return this.$store.getters["wishlistStore/wishlistItems"];
+    },
+    isInWishlist() {
+      return this.product
+        ? this.wishlist.some((item) => item.id === this.product.id)
+        : false;
+    },
+  },
   methods: {
+    toast(message) {
+      this.toastMessage = message;
+      this.showToast = true;
+      setTimeout(() => {
+        this.showToast = false;
+      }, 2000);
+    },
+
     decreaseQuantity() {
       if (this.quantity > 1) {
         this.quantity--;
@@ -42,19 +56,47 @@ export default {
     increaseQuantity() {
       this.quantity++;
     },
+    addToCart() {
+      for (let i = 0; i < this.quantity; i++) {
+        this.$store.dispatch("cartStore/appendToCart", this.product);
+      }
+      this.toast(`${this.quantity} item(s) added to cart`);
+    },
+    toggleWishlist() {
+      this.$store.dispatch("wishlistStore/toggleWishlist", this.product);
+      this.toast(
+        this.isInWishlist
+          ? "Item added to wishlist"
+          : "Item removed from wishlist"
+      );
+    },
   },
 };
 </script>
 
 <template>
-  <main v-if="product" class="p-12">
+  <main v-if="product" class="py-8 px-15">
+    <div
+      class="fixed top-0 left-0 w-full flex justify-center text-[#DB4444] bg-transparent text-center z-50"
+    >
+      <p
+        class="bg-white px-6 py-4 rounded-lg shadow-lg w-90 mx-auto transform transition-all duration-300 ease-out"
+        :class="
+          showToast
+            ? 'translate-y-6 opacity-100'
+            : '-translate-y-full opacity-0'
+        "
+      >
+        {{ toastMessage }}
+      </p>
+    </div>
     <PageHeader>
-      <template #path>Home/ {{ product.category }}</template>
+      <template #path>Home  / {{ product.category.charAt(0).toUpperCase() + product.category.slice(1)}}</template>
       <template #page>{{ product.title }}</template>
     </PageHeader>
-    <div class="flex gap-15">
+    <div class="flex gap-15 mt-6">
       <section class="flex gap-6">
-        <section class="grid grid-cols-1 gap-5 max-w-[55%]">
+        <section class="grid grid-cols-1 gap-5 max-h-[600px] max-w-[55%]">
           <div
             class="p-2 bg-[#F5F5F5] w-[170px] h-[138px] flex justify-center items-center rounded-[4px]"
           >
@@ -116,6 +158,7 @@ export default {
           <p class="text-[#00FF66]">In Stock</p>
         </div>
         <p class="text-[24px]">${{ product.price.toFixed(2) }}</p>
+        <p class="text-sm">{{ product.description }}</p>
         <hr />
         <div class="flex items-center gap-4">
           <h4>Colours:</h4>
@@ -144,7 +187,7 @@ export default {
           <div class="flex items-center border border-gray-300 rounded">
             <button
               @click="decreaseQuantity"
-              class="w-10 h-12 flex items-center justify-center hover:bg-gray-100 transition"
+              class="w-10 h-12 hover:bg-gray-100 transition cursor-pointer"
             >
               −
             </button>
@@ -153,27 +196,48 @@ export default {
             >
               {{ quantity }}
             </div>
-            <MainButton
+            <button
               @click="increaseQuantity"
-              class="w-[40px] h-[48px]"
+              class="w-[40px] h-[48px] bg-[#DB4444] text-white cursor-pointer"
             >
               +
-            </MainButton>
+            </button>
           </div>
-          <!-- @click="buyNow" -->
-          <MainButton
-            class="flex-1 h-12 font-medium"
-          >
+          <MainButton @click="addToCart" class="flex-1 h-12 font-medium">
             Buy Now
           </MainButton>
-          <!-- @click="addToWishlist" -->
-          <button
-            class="w-12 h-12 border border-gray-300 text-white rounded flex items-center justify-center hover:bg-gray-100 transition"
+          <div
+            @click="toggleWishlist"
+            :class="[
+              'w-12 h-12 border border-gray-300 rounded bg-white size-8 flex justify-center items-center cursor-pointer transition-colors duration-200',
+              isInWishlist ? 'text-red-500' : 'text-white hover:text-red-500',
+            ]"
           >
             <HeartIcon />
-          </button>
+          </div>
         </div>
-      
+
+        <section class="border">
+          <div class="flex px-4 items-center gap-4 w-[399px] h-[90px] border-b">
+            <DeliveryIcon />
+            <span>
+              <p>Free Delivery</p>
+              <p class="text-xs underline">
+                Enter your postal code for Delivery Availability
+              </p>
+            </span>
+          </div>
+          <div class="flex px-4 items-center gap-4 w-[399px] h-[90px]">
+            <ReturnIcon />
+            <span>
+              <p>Return Delivery</p>
+              <p class="text-xs">
+                Free 30 Days Delivery Returns.
+                <span class="underline">Details</span>
+              </p>
+            </span>
+          </div>
+        </section>
       </section>
     </div>
   </main>
