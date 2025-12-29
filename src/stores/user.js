@@ -28,7 +28,7 @@ export const userStore = {
       localStorage.setItem("userData", JSON.stringify(userData));
       commit("updateUser", userData);
     },
-    logoutUser({commit}) {
+    logoutUser({ commit }) {
       localStorage.removeItem("userData");
       commit("updateUser", null);
       console.log("user out");

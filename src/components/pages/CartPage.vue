@@ -9,7 +9,7 @@ export default {
     PageHeader,
     ArrowDown,
     MainButton,
-    WButton
+    WButton,
   },
   computed: {
     cart() {
@@ -40,7 +40,7 @@ export default {
       <template #page>Cart</template>
     </PageHeader>
 
-    <section v-if="cart.length>0" >
+    <section v-if="cart.length > 0">
       <div
         class="w-[1170px] h-[72px] rounded-[4px] shadow-sm px-8 flex justify-between items-center mt-6"
       >
@@ -96,22 +96,32 @@ export default {
             Return To Shop
           </WButton></RouterLink
         >
-        <WButton class="w-[218px] h-[56px] rounded-[4px] border border-black/50">
+        <WButton
+          class="w-[218px] h-[56px] rounded-[4px] border border-black/50"
+        >
           Update Cart
         </WButton>
       </div>
       <section class="flex justify-between mt-10">
         <div class="flex gap-4">
-          <input type="text" placeholder="Coupon Code"  class="w-[300px] h-[56px] rounded-[4px] border px-4"/>
+          <input
+            type="text"
+            placeholder="Coupon Code"
+            class="w-[300px] h-[56px] rounded-[4px] border px-4"
+          />
           <MainButton class="w-[211px]"> Apply Coupon </MainButton>
         </div>
-        <div class="w-[470px] h-[324px] rounded-[4px] border p-6" >
+        <div class="w-[470px] h-[324px] rounded-[4px] border p-6">
           <h4 class="text-[20px] font-medium">Cart Total</h4>
-          <span class="flex justify-between items-center py-4 border-b border-black/40">
+          <span
+            class="flex justify-between items-center py-4 border-b border-black/40"
+          >
             <p>Subtotal:</p>
             <p>${{ total }}</p>
           </span>
-          <span class="flex justify-between items-center py-4 border-b border-black/40">
+          <span
+            class="flex justify-between items-center py-4 border-b border-black/40"
+          >
             <p>Shipping:</p>
             <p>Free</p>
           </span>
@@ -120,15 +130,15 @@ export default {
             <p>${{ total }}</p>
           </span>
           <RouterLink to="/checkout" class="flex justify-center mt-4">
-            <MainButton class="w-[260px] h-[56px] ">Proceed to checkout</MainButton>
+            <MainButton class="w-[260px] h-[56px]"
+              >Proceed to checkout</MainButton
+            >
           </RouterLink>
         </div>
       </section>
     </section>
 
-    <p v-else class="text-center"> Your cart is currently empty</p>
+    <p v-else class="text-center">Your cart is currently empty</p>
   </main>
 </template>
-<style scoped>
-
-</style>
+<style scoped></style>
